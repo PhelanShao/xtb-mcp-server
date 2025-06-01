@@ -1,0 +1,29 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+
+$path # Pathfinder 算法参数 (请确认 xtb 版本兼容性)
+  nrun={path_nrun}              # pathfinder运行次数
+  nopt={path_nopt}              # 路径优化点数
+  kpush={path_kpush}            # 推离反应物的力常数
+  kpull={path_kpull}            # 拉向产物的力常数
+  product="{product_coord_file}" # 产物结构文件名 (例如 product.xyz)
+  # thr={path_threshold}        # 收敛阈值 (可选)
+  # mode={path_mode}            # 路径查找模式 (可选)
+$end
+
+# 通常路径查找也伴随着优化
+$opt
+  level={opt_level}
+  maxcycle={max_opt_cycles}
+$end
+
+$scc
+  temp={temperature}
+$end
+
+$write
+  json=true
+  # 可能需要输出路径上的结构和能量
+$end

@@ -1,0 +1,53 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+
+$md  # 元动力学是基于MD的
+  temp={md_temperature}
+  time={simulation_time_ps}
+  step={time_step_fs}
+  dump={dump_frequency_fs}
+  thermostat={thermostat_type} 
+  # sccacc={scc_accuracy}
+  # velv={velocity_seed}
+$end
+
+$metadyn # 元动力学特定参数
+  # cvs={number_of_cvs} # 集体变量数量 (可选, xtb可以自动检测)
+  # kpush={kpush_value} # 用于将高斯势垒推离已探索区域的力常数 (kJ/mol)
+  # alp={alpha_factor}  # 高斯宽度缩放因子 (Well-tempered metadynamics)
+  # pace={pace_value}   # 每多少步放置一个高斯势垒 (默认500)
+  # height={gaussian_height_kjmol} # 高斯势垒高度 (kJ/mol)
+  # width={gaussian_width_au_or_deg} # 高斯势垒宽度 (原子单位或度)
+  # biasfactor={bias_factor} # 用于Well-tempered metadynamics的偏置因子 (温度单位)
+  # grh={grid_spacing_for_hills} # 用于存储高斯势垒的网格间距
+  # file={hills_file_name} # 存储高斯势垒的文件名 (默认 HILLS)
+  
+  # 定义集体变量 (CV)
+  # 格式: coord=type,atom_idx1,atom_idx2[,atom_idx3,atom_idx4],min_val,max_val,k_wall,width_cv
+  # type: distance, angle, dihedral, coordination
+  # min_val, max_val: CV的边界 (用于墙势)
+  # k_wall: 墙势的力常数
+  # width_cv: 此CV对应的高斯宽度 (如果未在全局指定 width)
+  # 示例:
+  # coord=distance,1,5,1.0,4.0,100.0,0.2  # 原子1和5之间的距离，边界1-4A, 墙力100, CV宽度0.2A
+  # coord=dihedral,1,2,3,4,-180,180,50.0,10.0 # 二面角，边界-180到180度, 墙力50, CV宽度10度
+  {collective_variables_definition} 
+$end
+
+# 可选的墙势定义 (如果CV定义中包含了墙参数，则此块可能不需要)
+# $wall
+#   potential=polynomial # 或 harmonic
+#   # sphere: auto,atom_idx1,atom_idx2,... # 定义球形墙
+#   # lowerwall: cv_idx,lower_bound,force_constant
+#   # upperwall: cv_idx,upper_bound,force_constant
+# $end
+
+$scc
+  temp={scc_temperature}
+$end
+
+$write
+  json=true
+$end

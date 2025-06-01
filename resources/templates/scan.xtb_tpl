@@ -1,0 +1,24 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+$scan
+  # 扫描参数通常在 scan.inp 文件中定义
+  # 或者直接在这里定义模式
+  # mode=sequential  (或 explicit)
+  # 1: distance, 1, 2, 1.0, 2.0, 10  # 示例: 扫描原子1和2之间的距离，从1.0到2.0，共10步
+$end
+$scc
+  temp={temperature}
+$end
+$opt
+  # 扫描中的每一步通常会进行约束优化
+  level={opt_level}
+  maxcycle={max_opt_cycles}
+$end
+$write
+  json=true
+  # 可以输出每个扫描点的能量等信息
+$end
+# 如果使用外部 scan.inp, 则取消注释下一行
+# $input "scan.inp"

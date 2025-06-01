@@ -1,0 +1,20 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+$md
+  temp={md_temperature}      # 目标温度 (K)
+  time={simulation_time_ps}  # 模拟总时长 (ps)
+  step={time_step_fs}        # 时间步长 (fs)
+  dump={dump_frequency_fs}   # 轨迹输出频率 (fs)
+  # sccacc={scc_accuracy}    # SCC精度，默认为1.0
+  # thermostat={thermostat_type} # 恒温器类型 (e.g., berendsen, bussi)
+  # velv={velocity_seed}     # 初始速度种子
+$end
+$scc
+  temp={scc_temperature} # SCC计算的电子温度，通常与MD温度相关或一致
+$end
+$write
+  json=true # 输出最终结构和能量等
+  # 通常MD轨迹会写入 xtb.trj 或类似文件
+$end

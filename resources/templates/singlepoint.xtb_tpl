@@ -1,0 +1,11 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+$scc
+  temp={temperature}
+$end
+$write
+  json=true
+$end
+# 更多特定于单点计算的参数可以在这里添加

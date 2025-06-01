@@ -1,0 +1,53 @@
+# ONIOM Calculation Template for XTB
+# This is a conceptual template. Actual ONIOM setup in xtb's .xcontrolrc
+# involves defining QM regions and MM regions/parameters directly or via external files.
+# xtb's native ONIOM capabilities might be limited compared to full QM/MM packages.
+# This template assumes a two-layer ONIOM (QM:MM-like).
+
+$gfn {gfn_version_high_level} # Method for the high-level (QM) region
+$chrg {total_charge}
+$spin {total_spin_multiplicity}
+$alpb {solvent}
+
+$oniom # ONIOM block
+  # Define the high-level region (QM atoms)
+  # Option 1: List atom indices directly
+  # qmatoms=1,2,3,5-10 # Example: atoms 1,2,3 and 5 through 10 are QM
+
+  # Option 2: Specify a file containing QM atom indices (one index per line)
+  # qmfile="qm_atoms.list" 
+
+  {qmatoms_definition} # Placeholder for QM atom list or qmfile directive
+
+  # Define the low-level method for the MM region (or entire system if not subtracted)
+  # This is often a force field or a lower-level QM method.
+  # xtb might use GFN-FF implicitly for the MM part if not specified,
+  # or you might need to specify parameters if using a different MM force field.
+  # For QM:QM' ONIOM, you might specify another GFN version here.
+  method_low="{method_low_level}" # e.g., gfnff, or another gfn version
+
+  # Link atom handling (if bonds are cut between QM and MM regions)
+  # linkatoms_QM=atom_idx_in_QM,atom_idx_in_MM,H # Example: QM atom, MM atom, Link atom type (H)
+  {link_atoms_definition} # Placeholder for link atom definitions
+
+  # Other ONIOM settings (refer to xtb documentation for availability)
+  # inner_logs=true  # Example: for detailed logging of QM region
+  # ignore_topo=false # Example
+  # outer=true       # Example
+  # silent=false     # Example
+  {oniom_settings}
+$end
+
+# Optimization settings are often needed for ONIOM calculations
+$opt
+  level={opt_level}
+  maxcycle={max_opt_cycles}
+$end
+
+$scc
+  temp={temperature}
+$end
+
+$write
+  json=true
+$end

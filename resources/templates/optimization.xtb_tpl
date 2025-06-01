@@ -1,0 +1,21 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+$opt
+  level={opt_level}
+  maxcycle={max_opt_cycles}
+  # 可以添加更多优化相关的参数，例如 gdiis, linesearch 等
+$end
+$scc
+  temp={temperature}
+$end
+$write
+  json=true
+  # 可以添加更多输出选项，例如 wiberg 键级等
+$end
+# 约束可以在这里定义，或者通过一个单独的 constraints.inp 文件
+# $constrain
+#   force constant=1.0
+#   distance: 1,2,2.0
+# $end

@@ -1,0 +1,28 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+
+$modef # Normal Mode Following 参数
+  n={modef_n_points}          # 模式跟踪点数
+  step={modef_step_size}      # 步长 (Bohr or Angstrom, check xtb docs)
+  mode={modef_mode_index}     # 要跟踪的特定振动模式的索引 (通常在频率计算后确定)
+  # vthr={modef_freq_threshold} # 频率阈值 (cm-1, 可选)
+  # prj={modef_projection_mode} # 投影模式 (可选)
+  # hessian=file_name          # 从外部文件读取Hessian (可选)
+$end
+
+# 通常 Normal Mode Following 也伴随着优化
+$opt
+  level={opt_level}
+  maxcycle={max_opt_cycles}
+$end
+
+$scc
+  temp={temperature}
+$end
+
+$write
+  json=true
+  # 输出路径上的结构和能量
+$end

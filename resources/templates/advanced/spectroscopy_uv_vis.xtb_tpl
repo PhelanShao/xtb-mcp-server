@@ -1,0 +1,31 @@
+# UV-Vis Spectroscopy Template for XTB
+# UV-Vis spectra are typically calculated using sTDA (simplified TD-DFT/TD-DFTB) or full TD-DFTB.
+
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version} # GFN1 or GFN2 are typically used for sTDA
+$alpb {solvent}
+
+# sTDA calculation block
+$stda
+  nroots={stda_nroots}        # Number of excited states (roots) to calculate
+  # iter={stda_max_iterations} # Max Davidson iterations (optional, default is usually fine)
+  # ewin={stda_energy_window}  # Energy window for states (eV, optional)
+  # thrtc={stda_threshold}     # Threshold for Davidson (optional)
+  # ssc={stda_ssc_correction}  # Simple state correction (e.g., for triplet states, optional)
+$end
+
+# SCC settings
+$scc
+  temp={temperature}
+$end
+
+$write
+  json=true
+  # Output should include excitation energies, oscillator strengths, and transition dipoles.
+  # xtb usually prints this to the main output and potentially a specific .stda file or section in JSON.
+  excitation_energies=true # Placeholder
+  oscillator_strengths=true # Placeholder
+$end
+
+# Geometry should be optimized, usually at the ground state level, before UV-Vis calculation.

@@ -1,0 +1,18 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+$hess
+  # 频率计算通常在优化后的结构上进行
+  # 可以指定温度进行热化学分析
+  temp={temperature}
+  # 可以指定压力
+  # pressure={pressure_atm}
+$end
+$scc
+  temp={temperature} # 确保SCC温度与hess块中的温度一致或相关
+$end
+$write
+  json=true
+  # 输出振动模式等信息
+$end

@@ -1,0 +1,34 @@
+# IR Spectroscopy Template for XTB
+# This is essentially a frequency calculation, as IR spectra are derived from vibrational frequencies and intensities.
+
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+
+# Frequencies are calculated from the Hessian
+$hess
+  temp={temperature}        # Temperature for thermochemical analysis and broadening
+  # pressure={pressure_atm} # Pressure (optional)
+  # ssc={anharmonicity_flag} # For simple quasi-harmonic correction (e.g., ssc=true)
+$end
+
+# SCC settings are important for accurate Hessians
+$scc
+  temp={scc_temperature} # Should be consistent with $hess temperature or calculation conditions
+  # etol, maxiter, etc. can be specified if defaults are not sufficient
+$end
+
+$write
+  json=true
+  # For IR, xtb typically outputs vibrational frequencies and intensities in the main output.
+  # Specific keywords for direct IR spectrum plotting might not be available in .xcontrolrc itself,
+  # but post-processing of the output (e.g., xtb.log or xtb.json) is common.
+  # Ensure relevant vibrational data is printed.
+  vibrational_frequencies=true # Placeholder, xtb usually prints this by default with $hess
+  ir_intensities=true        # Placeholder, xtb usually prints this by default with $hess
+$end
+
+# It's crucial that the geometry is optimized before an IR/frequency calculation.
+# This template assumes an optimized geometry is provided as input.
+# If optimization is needed first, it should be a separate step or a combined $opt $hess run.

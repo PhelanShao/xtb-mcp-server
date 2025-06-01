@@ -1,0 +1,16 @@
+# XTB MCP Server Dependencies
+
+# Core MCP dependencies
+mcp>=1.0.0
+fastmcp>=0.1.0
+
+# Development and testing dependencies (optional)
+pytest>=7.0.0
+unittest2>=1.1.0
+
+# Python standard library modules used:
+# - pathlib (built-in)
+# - os (built-in)
+# - json (built-in)
+# - warnings (built-in)
+# - unittest (built-in)

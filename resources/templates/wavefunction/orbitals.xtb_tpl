@@ -1,0 +1,29 @@
+$chrg {charge}
+$spin {spin_multiplicity}
+$gfn {gfn_version}
+$alpb {solvent}
+# $scc settings can be included if needed, e.g., for specific electronic temperature
+# $scc
+#   temp={temperature}
+# $end
+
+$write
+  json=true
+  mos=true              # 输出分子轨道系数到 xtb. সমু (molden格式) 或 xtb.morb (二进制)
+  lmo=true              # 输出局域化分子轨道 (如果计算了)
+  orbital_energies=true # 在主输出中打印轨道能量
+  # mulliken=true         # 可选：同时输出 Mulliken 布居分析
+  # wiberg=true           # 可选：同时输出 Wiberg 键级
+$end
+
+# 对于轨道可视化，可能需要 $cube 块来生成轨道密度
+# $cube
+#   step={cube_grid_step}    # 网格步长 (埃)
+#   pthr={cube_density_threshold} # 密度矩阵阈值
+#   # cal= (1=density, 2=potential, 3=MO, 4=spin density, 5=ESP)
+#   # 如果要输出特定MO，例如HOMO:
+#   # mo={homo_index} # 需要知道HOMO的索引
+#   # 或者输出一定范围的MOs:
+#   # mo_min={mo_min_index}
+#   # mo_max={mo_max_index}
+# $end
